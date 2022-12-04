@@ -17,8 +17,8 @@ import (
 )
 
 const (
-	CheckIDLength   = 64
-	CheckIDPWLength = 64
+	CheckIDLength   = 32
+	CheckIDPWLength = 32
 	CheckIDChars    = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 )
 
@@ -33,6 +33,9 @@ var ( // Error definitions
 
 //go:embed chck.js
 var clientJavaScript []byte
+
+//go:embed chck.css
+var clientCSS []byte
 
 //go:embed index.html
 var index []byte
@@ -162,10 +165,8 @@ func handleNewSwitches(w http.ResponseWriter, r *http.Request) {
 func handleSwitch(w http.ResponseWriter, r *http.Request) {
 	id := CheckID(r.URL.Path[1:]) // Chop the leading slash
 
-	if id == "" {
-		// Display index.html
-		w.Header().Add("Content-Type", "text/html")
-		w.Write(index)
+	if id == "" || !id.Valid() {
+		handleStatic(w, r)
 		return
 	}
 	
@@ -232,8 +233,22 @@ func handleSwitch(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func handleJS(w http.ResponseWriter, r *http.Request) {
-	w.Write(clientJavaScript)
+func handleStatic(w http.ResponseWriter, r *http.Request) {
+	switch r.URL.Path {
+	case "/css/chck.css":
+		// Send chck.css
+		w.Header().Add("Content-Type", "text/css; charset=utf-8")
+		w.Write(clientCSS)
+	case "/js/chck.js":
+		w.Header().Add("Content-Type", "application/javascript; charset=utf-8")
+		w.Write(clientJavaScript)
+	case "/":
+		// Display index.html
+		w.Header().Add("Content-Type", "text/html; charset=utf-8")
+		w.Write(index)
+	default:
+		http.Error(w, "Not found", http.StatusNotFound)
+	}
 }
 
 func serve() {
@@ -250,11 +265,6 @@ func serve() {
 
 	mux.HandleFunc("/", handleSwitch)
 	mux.HandleFunc("/mk", handleNewSwitches)
-	mux.HandleFunc("/js/chck.js",
-		func(w http.ResponseWriter, r *http.Request) {
-			w.Header().Add("Content-type", "application/javascript")
-			w.Write(clientJavaScript)
-		})
 
 	if err := http.ListenAndServe(":" + os.Getenv("PORT"), &mux); err != nil {
 		log.Fatal(err)

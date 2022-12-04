@@ -9,11 +9,8 @@ var chck = {
 	'custom_icons': {},
 
 	'api': {
-	    'uri': 'http://192.168.1.61:5000/'
+	    'uri': 'http://localhost:5000/'
 	},
-	
-	'style': '',
-	'custom_styles': {}
     },
 
     'api': {
