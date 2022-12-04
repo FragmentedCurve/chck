@@ -29,7 +29,7 @@ var chck = {
 			    state = 'off';
 			break;
 		    case 404:
-			state = 'dead;'
+			state = 'dead'
 			break;
 		    case 401:
 			state = 'unauthorized';
@@ -88,7 +88,7 @@ var chck = {
 	'update': function(element, state) {
 	    const id = chck.tag.id(element);
 	    let icon_update = chck.config.icons[state];
-	    
+
 	    if (id in chck.config.custom_icons && state in chck.config.custom_icons[id])
 		icon_update = chck.config.custom_icons[id][state];
 
