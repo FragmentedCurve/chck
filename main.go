@@ -256,7 +256,7 @@ func serve() {
 			w.Write(clientJavaScript)
 		})
 
-	if err := http.ListenAndServe(":5000", &mux); err != nil {
+	if err := http.ListenAndServe(":" + os.Getenv("PORT"), &mux); err != nil {
 		log.Fatal(err)
 	}
 }
