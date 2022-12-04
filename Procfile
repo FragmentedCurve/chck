@@ -1,1 +1,1 @@
-web: ./chck serve
+web: ./bin/chck serve
