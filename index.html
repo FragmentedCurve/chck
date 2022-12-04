@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <style>
+    body {
+	font-family:'Lucida Console', monospace
+    }
+
+    h2 {
+	margin-top: 2em;
+    }
+
+    h3 {
+	margin-top: 1.5em;
+    }
+
+    chck {
+	display: inline-block;
+	
+	background: #dedbde;
+	color: #000000;
+	border: 2px outset #e8e8e8;
+	border-radius: 15px 30px 30px 15px;
+	padding: 2px;
+	padding-left: 4px;
+	padding-right: 1em;
+
+	/* Fonts */
+	font-weight: bold;
+	font-size: 1em;
+
+	text-decoration-style: dashed;
+	letter-spacing: -0.15em;
+	word-spacing: 0.5em;
+	text-shadow: 2px 2px 5px #ffffff; 
+    }
+
+    chck input {
+	margin-left: 0.25em;
+	height: 1em;
+    }
+  </style>
+  <body>
+    <script src="http://192.168.1.61:5000/js/chck.js"></script>
+    <h1>chck✅</h1>
+    <h2>HowTO</h2>
+
+    <p>
+      Setting up chck✅ is easy. First import the JavaScript library from chck✅:
+    </p>
+
+    <pre>&lt;script src="http://localhost:5000/js/chck.js"&gt;&lt;/script&gt;</pre>
+
+    Then create your CheckID. There's two methods for creating a new CheckID.
+    
+    <h2>Example</h2>
+
+    <h3>Public Example</h3>
+    <p>
+      Toggle the checkmark by clicking or tapping
+      it: <chck value="example"></chck>
+    </p>
+
+    <h3>Password Protected Example</h3>
+    <p>
+      Now try doing the same with this password protected checkmark:
+      <chck value="examplepw"><input type="text" /></chck>
+    </p>
+    <p>The password is 'password'.</p>
+
+    <h2>Make Your Own Chck</h2>
+
+    <form method="get" action="/mk">
+      <input type="number" name="count" value="1">
+      <input type="password" name="password">
+      <input type="submit" value="Generate">
+    </form>
+    
+    <h2>Donate</h2>
+    <p>If you like usingc chck✅, please consider donating.</p>
+  </body>
+</html>
