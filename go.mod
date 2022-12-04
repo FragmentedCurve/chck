@@ -1,4 +1,4 @@
-module github.com/FragmentedCurve/checky
+module github.com/FragmentedCurve/chck
 
 go 1.19
 
