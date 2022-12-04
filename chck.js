@@ -9,7 +9,7 @@ var chck = {
 	'custom_icons': {},
 
 	'api': {
-	    'uri': 'http://localhost:5000/'
+	    'uri': ''
 	},
     },
 
@@ -132,9 +132,4 @@ var chck = {
 		chck.tag.refresh(e);
 	}
     },
-};
-
-window.onload = function() {
-    chck.page.refresh();
-    return this;
 };

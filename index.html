@@ -18,7 +18,6 @@
     }
   </style>
   <body>
-    <script src="http://localhost:5000/js/chck.js"></script>
     <h1>chck✅</h1>
     <h2>HowTO</h2>
 
@@ -55,5 +54,12 @@
     
     <h2>Donate</h2>
     <p>If you like usingc chck✅, please consider donating.</p>
+
+    <script src="/js/chck.js"></script>
+    <script>
+      chck.config.api.uri = '/';
+      chck.page.refresh();
+    </script>
+    
   </body>
 </html>
