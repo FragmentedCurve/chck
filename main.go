@@ -34,9 +34,6 @@ var ( // Error definitions
 //go:embed chck.js
 var clientJavaScript []byte
 
-//go:embed chck.css
-var clientCSS []byte
-
 //go:embed index.html
 var index []byte
 
@@ -235,10 +232,6 @@ func handleSwitch(w http.ResponseWriter, r *http.Request) {
 
 func handleStatic(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
-	case "/css/chck.css":
-		// Send chck.css
-		w.Header().Add("Content-Type", "text/css; charset=utf-8")
-		w.Write(clientCSS)
 	case "/js/chck.js":
 		w.Header().Add("Content-Type", "application/javascript; charset=utf-8")
 		w.Write(clientJavaScript)
