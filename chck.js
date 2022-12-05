@@ -2,7 +2,7 @@ var chck = {
     'config': {
 	'icons': {
 	    'on': '✅',
-	    'off': '❌',
+	    'off': '❎',
 	    'dead': '💀',
 	    'unauthorized': '🔒 <input name="chck-password" text="text" placeholder="Password..." />'
 	},
