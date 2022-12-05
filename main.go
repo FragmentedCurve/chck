@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	_ "embed"
 	"errors"
 	"fmt"
 	"log"
@@ -10,7 +11,6 @@ import (
 	"os"
 	"strconv"
 	"time"
-	_ "embed"
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -137,7 +137,7 @@ func handleNewSwitches(w http.ResponseWriter, r *http.Request) {
 	password := r.URL.Query().Get("password")
 
 	w.Header().Add("Content-Type", "text/plain")
-	
+
 	if len(count) == 0 {
 		count = "1"
 	}
@@ -166,7 +166,7 @@ func handleSwitch(w http.ResponseWriter, r *http.Request) {
 		handleStatic(w, r)
 		return
 	}
-	
+
 	password := r.URL.Query().Get("password")
 
 	w.Header().Add("Content-Type", "text/plain")
@@ -259,7 +259,7 @@ func serve() {
 	mux.HandleFunc("/", handleSwitch)
 	mux.HandleFunc("/mk", handleNewSwitches)
 
-	if err := http.ListenAndServe(":" + os.Getenv("PORT"), &mux); err != nil {
+	if err := http.ListenAndServe(":"+os.Getenv("PORT"), &mux); err != nil {
 		log.Fatal(err)
 	}
 }
@@ -288,6 +288,12 @@ func initDB() {
 		log.Fatal("Failed to create table.")
 		return
 	}
+
+	_, err = tx.Exec(ctx, `INSERT INTO switches (id, password) VALUES ('example', ''), ('examplepw', 'password'), ('invader', '')`)
+	if err != nil {
+		log.Fatal("Failed to insert data.")
+	}
+
 	tx.Commit(ctx)
 }
 
