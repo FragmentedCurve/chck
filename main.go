@@ -307,6 +307,8 @@ Commands
   serve             Run service
   help              Display this`, os.Args[0])
 	fmt.Println()
+	// TODO: Add environment variable information, for example
+	// $PORT and $DATABASE_URL.
 }
 
 func main() {
