@@ -100,10 +100,15 @@ var chck = {
 	    };
 	    
 	    if (state == 'unauthorized') {
-		// TODO: Review this block.
 		let input = chck.tag.getPasswordTag(element);
 
-		if (input !== undefined) {
+		if (input === undefined) {
+		    // If there's no password prompt, refresh the chck
+		    // after a timeout.
+		    setTimeout(() => {
+			chck.tag.refresh(element);
+		    }, 1000);
+		} else {
 		    element.onclick = null;
 		    input.focus();
 
@@ -120,7 +125,6 @@ var chck = {
 			    });
 			}
 		    };
-		    
 		}
 	    }
 	},
