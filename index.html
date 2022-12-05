@@ -2,11 +2,14 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <link type="text/css" rel="stylesheet" href="/css/chck.css" />
   </head>
   <style>
     body {
 	font-family:'Lucida Console', monospace
+    }
+
+    h1 {
+	display: inline;
     }
 
     h2 {
@@ -18,46 +21,83 @@
     }
   </style>
   <body>
-    <h1>chck✅</h1>
-    <h2>HowTO</h2>
+    <p><h1>chck✅</h1> provides a simple and easy way to create publicly accessible toggle switches.</p>
+
+
+    <h2>Quick Example</h2>
 
     <p>
-      Setting up chck✅ is easy. First import the JavaScript library from chck✅:
+      Try toggling the switch by clicking or tapping: <chck value="example"></chck>
     </p>
 
-    <pre>&lt;script src="http://localhost:5000/js/chck.js"&gt;&lt;/script&gt;</pre>
-
-    Then create your CheckID. There's two methods for creating a new CheckID.
-    
-    <h2>Example</h2>
-
-    <h3>Public Example</h3>
     <p>
-      Toggle the checkmark by clicking or tapping
-      it: <chck value="example"></chck>
+      That switch is publicly accessible to anyone that can see this
+      page. A switch can be password protected to limit the scope of
+      people who can change its state.
     </p>
 
-    <h3>Password Protected Example</h3>
     <p>
-      Now try doing the same with this password protected checkmark:
-      <chck value="examplepw"><input type="text" /></chck>
+      Try doing the same thing wit this one: <chck value="examplepw"></chck>
     </p>
-    <p>The password is 'password'.</p>
 
-    <h2>Make Your Own Chck</h2>
+    <p>
+      (Hint: The password is 'password'.)
+    </p>
+
+    <h2>Adding chck✅ Support to Your Site</h2>
+
+    <p>
+      Just copy and paste the code below to the bottom of your
+      webpage. Replace <code>example.org</code> with the hostname of
+      your chck✅ provider.
+    </p>
+
+    <pre>
+      &lt;script src="https://example.org/js/chck.js"&gt;&lt;/script&gt;
+      &lt;script&gt;
+        chck.config.api.uri = 'https://example.org/';
+        // Custom configuration & code here...
+        chck.page.refresh();
+      &lt;/script&gt;</pre>
+
+    <p>Then create your html <code>&lt;chck&gt;</code> tag.</p>
+
+    <h2>Using a <code>&lt;chck&gt;</code> Tag</h2>
+
+    <p>The simplest usage is embedding it in a paragraph such as,</p>
+
+    <pre>
+      &lt;p&gt;
+        Try toggling the switch by clicking or tapping: &lt;chck value="example"&gt;&lt;/chck&gt;
+      &lt;/p&gt;</pre>
+
+    <p>A password can be embedded in the tag. For example,</p>
+
+    <pre>
+      &lt;chck value="examplepw" password="password"&gt;&lt;/chck&gt;</pre>
+
+    <p>Custom emojis (or HTML) can be set per chck✅ switch. For example,</p>
+
+    <pre>
+      &lt;chck value="examplepw" password="password"&gt;&lt;/chck&gt;
+      &lt;script&gt;
+	chck.config.custom_icons['invader'].on = '👾';
+      &lt;/script&gt;</pre>
+
+    <p>will replace ✅ with 👾. Try it out, <chck value="invader"></chck>.</p>
+
+    <h2>Make Your Own <code>&lt;chck&gt;</code></h2>
 
     <form method="get" action="/mk">
-      <input type="number" name="count" value="1">
-      <input type="password" name="password">
+      <input type="number" name="count" min="1" max="10" placeholder="How many chck✅ tags?">
+      <input type="password" name="password" placeholder="Password (optional)" show>
       <input type="submit" value="Generate">
     </form>
-    
-    <h2>Donate</h2>
-    <p>If you like usingc chck✅, please consider donating.</p>
 
     <script src="/js/chck.js"></script>
     <script>
       chck.config.api.uri = '/';
+      chck.config.custom_icons['invader'] = { 'on': '👾' };
       chck.page.refresh();
     </script>
   </body>
